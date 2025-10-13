@@ -1,0 +1,62 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* --- Base Styles --- */
+/* Good practice for a consistent dark theme and proper height */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #0F172A; /* Tailwind's slate-900 */
+  color: #E2E8F0; /* Default text color for dark theme */
+}
+
+/* --- Animations for LandingPage & UploadPage Backgrounds --- */
+/* Keyframes for the "Shooting Stars" effect */
+@keyframes star-fall-1 {
+  0%   { transform: translate(-10vw, -10vh); opacity: 1; }
+  100% { transform: translate(100vw, 90vh); opacity: 0; }
+}
+@keyframes star-fall-2 {
+  0%   { transform: translate(50vw, -20vh); opacity: 1; }
+  100% { transform: translate(-20vw, 100vh); opacity: 0; }
+}
+@keyframes star-fall-3 {
+  0%   { transform: translate(110vw, 50vh); opacity: 1; }
+  100% { transform: translate(-10vw, 60vh); opacity: 0; }
+}
+
+/* Classes to apply the star animations */
+.animate-star-1 {
+  animation: star-fall-1 12s linear infinite;
+  animation-delay: 2s;
+}
+.animate-star-2 {
+  animation: star-fall-2 15s linear infinite;
+  animation-delay: 5s;
+}
+.animate-star-3 {
+  animation: star-fall-3 10s linear infinite;
+  animation-delay: 8s;
+}
+
+
+/* --- Animations for Header & Footer --- */
+/* Keyframes for the Header's "Aurora Glow" */
+@keyframes aurora-glow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Keyframes for the shimmering border effect */
+@keyframes border-shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Class to apply the aurora glow to the Header */
+
+
+/* Note: The old ".animate-blob" keyframes were for the orange theme and are no longer needed with the new "Cosmic Grid" background. */

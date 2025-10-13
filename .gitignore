@@ -1,24 +1,81 @@
+# ====================
+# Node / React
+# ====================
+
+# Node modules
+node_modules/
+
+# Build output
+build/
+dist/
+out/
+
 # Logs
-logs
-*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Misc
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+
+# ====================
+# Python / ML
+# ====================
+
+# Byte-compiled / Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Data files
+*.csv
+*.json
+*.xlsx
+*.pkl
+*.npy
+*.npz
+*.h5
+*.hdf5
+
+# Model weights and checkpoints
+*.pt
+*.pth
+*.ckpt
+*.model
+*.weights
+
+# Logs
+*.log
+logs/
+wandb/
+mlruns/
+
+# Outputs
+output/
+results/
+predictions/
+figures/
+plots/

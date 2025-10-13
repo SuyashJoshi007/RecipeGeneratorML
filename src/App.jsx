@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UploadPage from './components/UploadPage.jsx';
 import LandingPage from './components/LandingPage.jsx';
 import Footer from './components/Footer.jsx';
-import Header from './components/header.jsx';
+import Header from './components/Header.jsx';
 import RecipeForm from './components/RecipeForm.jsx';
 import RecipePage from './components/RecipePage.jsx';
 function App() {

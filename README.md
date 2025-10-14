@@ -1,3 +1,7 @@
+🍳 Recipe Generator
+
+A smart application to help you discover recipes based on the ingredients you have. Leveraging machine learning, you can even snap a photo of your ingredients, and the app will identify them for you. Say goodbye to the eternal question: "What's for dinner?"
+
 📖 Table of Contents
 
     About The Project
@@ -22,37 +26,42 @@
 
     📄 License
 
-    📞 Contact
 
 📝 About The Project
 
-![Project Screenshot](./public/image.png)
-
-This Recipe Generator was created to solve a common household problem: having a pantry full of ingredients but no idea what to make. This tool allows users to input the ingredients they have on hand and receive a curated list of delicious recipes. It can also filter by dietary needs, cuisine type, cooking time, and more, making meal planning simple and fun.
+This Recipe Generator was created to solve a common household problem: having a pantry full of ingredients but no idea what to make. This tool allows users to manually input ingredients or use their device's camera to automatically detect them. The app then fetches a curated list of delicious recipes, with filters for dietary needs, cuisine type, and more, making meal planning simple and fun.
 
 ✨ Features
 
-    Ingredient-Based Search: Find recipes using the ingredients you already have.
+    📸 Image-Based Ingredient Recognition: Snap a photo of your ingredients, and the app's custom-trained YOLO model will automatically detect and list them.
 
-    Advanced Filtering: Filter results by cuisine, diet, and meal type.
+    📝 Ingredient-Based Search: Find recipes using a list of ingredients.
 
-    Real-time Database: Recipes and user favorites are stored and synced instantly with Firestore.
+    ⚙️ Advanced Filtering: Filter results by cuisine, diet (e.g., Vegan, Gluten-Free), and meal type.
 
-    Secure Authentication: User accounts are managed securely with Firebase Authentication.
+    ☁️ Real-time Database: User favorites are stored and synced instantly with Cloud Firestore.
 
-    Serverless Functions: Backend logic is handled by Cloud Functions for scalability.
+    🔐 Secure Authentication: User accounts are managed securely with Firebase Authentication.
 
-    Save Your Favorites: Logged-in users can save their favorite recipes for later.
+    💾 Save Your Favorites: Logged-in users can save their favorite recipes for later.
 
 🛠️ Built With
 
-This project is built with modern JavaScript technologies and is powered by the Firebase platform.
+This project uses modern JavaScript, a serverless backend, and a custom-trained machine learning model.
 
     Frontend:
 
         React
 
-        Vite (or Create React App)
+        Vite
+
+    Machine Learning:
+
+        Model: YOLO (You Only Look Once)
+
+        Task: Object Detection for ingredients
+
+        Training Platform: Roboflow
 
     Backend & Infrastructure:
 
@@ -62,13 +71,11 @@ This project is built with modern JavaScript technologies and is powered by the 
 
         Database: Cloud Firestore
 
-        Backend Logic: Cloud Functions for Firebase
-
         Hosting: Firebase Hosting
 
     API:
 
-        Spoonacular API (or another recipe data provider)
+        Google Gemini API for recipe generation.
 
 🚀 Getting Started
 
@@ -78,9 +85,7 @@ Prerequisites
 
 Make sure you have Node.js and the Firebase CLI installed.
 
-    Node.js (v18.x or later recommended)
-
-    NPM (comes with Node.js)
+    Node.js (v18.x or later)
 
     Firebase CLI
     Bash
@@ -100,7 +105,7 @@ Bash
 
 npm install
 
-Install backend (Cloud Functions) dependencies:
+Install backend (Cloud Functions) dependencies (if you have them):
 Bash
 
 cd functions
@@ -108,7 +113,6 @@ npm install
 cd ..
 
 Connect to your Firebase project:
-Log in to Firebase and initialize the project.
 Bash
 
     firebase login
@@ -118,29 +122,19 @@ Bash
 
 ⚙️ Configuration
 
-This project requires a Firebase configuration object to connect to your Firebase services.
+This project requires environment variables to connect to Firebase and other services.
 
-    Get your Firebase config:
+    Get your Firebase config from your Firebase project console settings.
 
-        Go to your Firebase project console.
-
-        Click the gear icon > Project settings.
-
-        In the "Your apps" card, select the Web app (</>).
-
-        Under "Firebase SDK snippet", choose Config and copy the firebaseConfig object.
-
-    Create an environment file:
-    In the root of your project, create a file named .env.local.
+    Create an environment file: In the root of your project, copy the example file.
     Bash
 
 cp .env.example .env.local
 
-Add your Firebase and API keys to .env.local:
-Note: If using Create React App, prefixes must be REACT_APP_. If using Vite, prefixes must be VITE_.
+Add your keys to .env.local. If using Vite, prefixes must be VITE_.
 Code snippet
 
-    # For Vite
+    # Firebase Configuration
     VITE_FIREBASE_API_KEY="your-api-key"
     VITE_FIREBASE_AUTH_DOMAIN="your-project-id.firebaseapp.com"
     VITE_FIREBASE_PROJECT_ID="your-project-id"
@@ -148,20 +142,22 @@ Code snippet
     VITE_FIREBASE_MESSAGING_SENDER_ID="your-sender-id"
     VITE_FIREBASE_APP_ID="your-app-id"
 
-    # External Recipe API Key
-    VITE_RECIPE_API_KEY="YOUR_SPOONACULAR_API_KEY_HERE"
+    # Google Gemini API Key
+    VITE_GEMINI_API_KEY="YOUR_GEMINI_API_KEY_HERE"
+
+    # YOLO Model Endpoint/API Key (if applicable)
+    VITE_YOLO_API_KEY="YOUR_YOLO_MODEL_API_KEY_HERE"
 
 🧩 Usage
 
-This project uses the Firebase Local Emulator Suite to run the entire backend locally for easy development.
+You can run the full application locally using the Firebase Local Emulator Suite.
 
     Start the Firebase Emulators:
-    This will start local instances of Authentication, Firestore, and Functions.
     Bash
 
 firebase emulators:start
 
-In a new terminal window, start the React frontend:
+In a new terminal, start the React frontend:
 Bash
 
     npm run dev
@@ -170,16 +166,14 @@ Bash
 
 Deployment
 
-To deploy your application to Firebase Hosting and Cloud Functions:
+To deploy your application to Firebase:
 Bash
 
 firebase deploy
 
 🧪 Running Tests
 
-To run the automated tests for this system:
-
-    For the frontend (React components):
+    For the frontend (React):
     Bash
 
 npm test
@@ -192,9 +186,7 @@ Bash
 
 🤝 Contributing
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Contributions are greatly appreciated. Please fork the repository and open a pull request.
 
     Fork the Project
 
@@ -210,8 +202,5 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 Distributed under the MIT License. See LICENSE.txt for more information.
 
-📞 Contact
 
-[Your Name] - [@your_twitter] - your_email@example.com
-
-Project Link: https://github.com/your-username/recipe-generator
+Project Link: https://github.com/SuyashJoshi007/RecipeGeneratorML

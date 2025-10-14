@@ -83,6 +83,7 @@ export default function RecipeForm({ initial = {} }) {
 
   const handleReset = () => {
     setDishName("");
+    // Hello
     setDiet("none");
     setCalories("");
     setServings(2);

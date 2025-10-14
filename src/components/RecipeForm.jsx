@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { generatePrompt } from "./options.jsx";
 import { generateRecipe } from "./AIModel.jsx";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import app from "@/firebaseconfig.js";
 
 const dietOptions = [
   { value: "none", label: "None" },
@@ -31,6 +33,23 @@ const FlameIcon = ({ className }) => (
     <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
   </svg>
 );
+
+/**
+ * Saves a recipe JSON object to the 'recipes' collection in Firestore.
+ * @param {object} recipeData The JSON object containing the recipe details.
+ * @returns {Promise<string|null>} The ID of the new document, or null if it fails.
+ */
+const saveRecipeToFirestore = async (recipeData) => {
+  try {
+    const db = getFirestore(app);
+    const docRef = await addDoc(collection(db, "recipes"), recipeData);
+    // console.log("Recipe successfully saved with ID: ", docRef.id);
+    return docRef.id;
+  } catch (e) {
+    console.error("Error saving recipe to Firestore: ", e);
+    return null;
+  }
+};
 
 export default function RecipeForm({ initial = {} }) {
   const navigate = useNavigate();
@@ -66,12 +85,30 @@ export default function RecipeForm({ initial = {} }) {
       toast.loading("Crafting your recipe...");
       const result = await generateRecipe(finalPrompt);
 
-      if (result) {
-        toast.success("Recipe generated! Redirecting...");
+      // --- START: MODIFIED BLOCK ---
+
+      // Step 1: Log the raw result to see what the AI is sending back
+      // console.log("----------- AI Response -----------");
+      // console.log("Type of result:", typeof result);
+      // console.log("Raw result from AI:", result);
+      // console.log("---------------------------------");
+
+      // Step 2: Validate the result before saving
+      if (result && typeof result === 'object' && Object.keys(result).length > 0) {
+        toast.success("Recipe generated! Saving and redirecting...");
+        
+        // The data is a valid object, so we can now save it
+        await saveRecipeToFirestore(result);
+        
         navigate("/recipe-page", { state: { recipe: result } });
       } else {
-        toast.error("Failed to generate recipe. Please try again.");
+        // This will now catch cases where the AI returns bad data
+        toast.error("AI returned invalid data format. Please try again.");
+        console.error("Failed to save. Invalid data from AI:", result);
       }
+
+      // --- END: MODIFIED BLOCK ---
+
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong while generating the recipe.");
@@ -83,7 +120,6 @@ export default function RecipeForm({ initial = {} }) {
 
   const handleReset = () => {
     setDishName("");
-    // Hello
     setDiet("none");
     setCalories("");
     setServings(2);

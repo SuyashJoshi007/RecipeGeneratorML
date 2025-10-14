@@ -94,18 +94,34 @@ export async function generateRecipe(prompt) {
       if (chunk.text) fullResponse += chunk.text;
     }
 
-    // --- Parse and normalize JSON ---
+    // --- START: Clean and Parse JSON ---
     try {
-      const parsed = JSON.parse(fullResponse);
+      // Find the first '{' and the last '}' to extract the JSON object
+      const startIndex = fullResponse.indexOf('{');
+      const endIndex = fullResponse.lastIndexOf('}');
+
+      if (startIndex === -1 || endIndex === -1) {
+        // console.error("❌ No JSON object found in the AI response.");
+        // console.log("Raw AI Response:\n---\n", fullResponse, "\n---");
+        throw new Error("No JSON object found in the AI response.");
+      }
+
+      // Extract the clean JSON string from the raw text
+      const jsonString = fullResponse.substring(startIndex, endIndex + 1);
+      
+      // Parse only the clean string
+      const parsed = JSON.parse(jsonString);
       return normalizeRecipe(parsed);
+
     } catch (parseError) {
-      console.error("❌ Failed to parse JSON:", parseError);
-      console.log("Raw AI Response:\n---\n", fullResponse, "\n---");
+      // console.error("❌ Failed to parse the extracted JSON:", parseError);
+      // console.log("Raw AI Response that was cleaned:\n---\n", fullResponse, "\n---");
       throw new Error("The AI returned a response that was not valid JSON.");
     }
+    // --- END: Clean and Parse JSON ---
 
   } catch (error) {
-    console.error("Error in generateRecipe function:", error);
+    // console.error("Error in generateRecipe function:", error);
     throw new Error("Failed to generate a recipe from the AI model.");
   }
 }

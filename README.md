@@ -44,11 +44,13 @@ This Recipe Generator was created to solve a common household problem: having a 
 ## ✨ Features
 
 -   📸 **Image-Based Ingredient Recognition**: Snap a photo of your ingredients, and the app's custom-trained YOLO model will automatically detect and list them.
--   📝 **Ingredient-Based Search**: Find recipes using a list of ingredients from a vast dataset.
+-   📝 **Ingredient-Based Search**: Find recipes using a list of ingredients from a vast dataset using Yolo.
+-   💾 **Real Time Recipe generation**: Generate recipe using the gemini api.
 -   ⚙️ **Advanced Filtering**: Filter results by cuisine, diet (e.g., Vegan, Gluten-Free), and meal type.
 -   ☁️ **Real-time Database**: User favorites are stored and synced instantly with Cloud Firestore.
 -   🔐 **Secure Authentication**: User accounts are managed securely with Firebase Authentication.
 -   💾 **Save Your Favorites**: Logged-in users can save their favorite recipes for later.
+
 
 ---
 ![Recipe Generator Screenshot](./frontend/public/image.png)
@@ -79,6 +81,8 @@ This project is a monorepo, containing both the frontend and backend code in a s
 
 
 ---
+
+![DataBase Screenshot](./frontend/public/database.png)
 
 ## 🚀 Getting Started
 

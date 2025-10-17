@@ -10,8 +10,6 @@
 
 A smart application to help you discover recipes based on the ingredients you have. Leveraging machine learning, you can even snap a photo of your ingredients, and the app will identify them for you. Say goodbye to the eternal question: "What's for dinner?"
 
-**Live Demo:** [**recipe-generator-ml.vercel.app/**](recipe-generator-ml.vercel.app/)
-
 ---
 
 ## 📖 Table of Contents

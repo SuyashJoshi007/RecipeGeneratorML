@@ -47,7 +47,7 @@ This Recipe Generator was created to solve a common household problem: having a 
 
 
 ---
-![Recipe Generator Screenshot](./frontend/public/image.png)
+![Recipe Generator Screenshot](./frontend/public/landingPage.png)
 
 ## 🛠️ Tech Stack
 

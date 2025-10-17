@@ -1,9 +1,3 @@
-Of course, Suyash. Your current README is a great start. I've restructured it, added some new sections to make it more professional, and updated the instructions to match your project's new frontend/backend structure.
-
-This version adds a project structure overview, clearer setup steps, a placeholder for a live demo, and a section for API endpoints.
-
-Here is the updated README. You can copy and paste this directly into your README.md file on GitHub.
-Markdown
 
 # 🍳 Recipe Generator
 

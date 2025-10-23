@@ -62,7 +62,7 @@ This project uses a modern tech stack, combining a powerful frontend, a Python b
 | **Deployment/Hosting** | `Vercel` (for Frontend), `Firebase Hosting`, `Render` (for Backend)                   |
 
 ---
-
+```
 ## 📂 Project Structure
 
 This project is a monorepo, containing both the frontend and backend code in a single repository.
@@ -71,7 +71,7 @@ This project is a monorepo, containing both the frontend and backend code in a s
 ├── backend/      # Contains the Python backend (FastAPI/Flask)
 └── frontend/     # Contains the React (Vite) frontend application
 
-
+```
 ---
 
 ![DataBase Screenshot](./frontend/public/database.png)
